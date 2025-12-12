@@ -33,5 +33,3 @@ to do.
 * Format printer output more nicely?
 * Functionality to monitor every 5s or something?
 * Improve website look
-* github repo
-* Make sure this works on windows
