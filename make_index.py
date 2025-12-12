@@ -1,31 +1,21 @@
 import os
 import sys
-
-def command_button(command, indent=6):
-    indent = ' '*indent
-    button = f"""{indent}<button onclick="printer_{command}()"> {command}</button>"""
-
-    script = f"""{indent}<script>printer_{command} = () => $.ajax("{command}").then(content => document.getElementById('resp').innerText = content)</script>\n"""
-
-    return button, script
-
+from env import printer_ip
 
 commands = eval(open('commands.json').read())
 
 schema = open('schema.html').read()
 
-buttons, scripts = "", ""
+buttons_html = ""
+indent = ' '*4
 
-for c in commands:
-    b, s = command_button(c)
-    buttons += b + " "
-    scripts += s
+for command in commands:
+    buttons_html += f"""{indent}<button onclick="printer_{command}()"> {command}</button>\n"""
+    buttons_html += f"""{indent}<script>printer_{command} = () => $.ajax("{command}").then(content => document.getElementById('resp').innerText = content)</script>\n"""
 
-schema = schema.replace('$#commands#$', buttons + '\n' + scripts)
+schema = schema.replace('$#commands#$', buttons_html)
 
-from env import printer_ip
-
-video = f"""<img id="stream" alt="Camera feed didn't load. You can make sure it's not open elsewhere and refresh this page." src=http://{printer_ip}:8080/?action=stream />"""
+video = f"""{indent}<img id="stream" alt="Camera feed didn't load. You can make sure it's not open elsewhere and refresh this page." src=http://{printer_ip}:8080/?action=stream />"""
 
 schema = schema.replace("$#video#$", video)
 
