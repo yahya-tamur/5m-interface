@@ -1,5 +1,4 @@
-Usage:
-######
+## Usage:
 
 * Set your printer's ip address in env.py
 
@@ -9,9 +8,9 @@ Usage:
 
 * Connect to the server address (default `localhost:8080`) from a browser.
 
-Organization:
-#############
-`schema.html` and `index.css` should be modified to create the web page.
+## Organization:
+
+`schema.html` and `index.css` describe the web page.
 
 Run `python make_index.py` to create the `index.html` page from the schema.
 (In practice, this just adds the video and buttons programatically).
@@ -25,11 +24,12 @@ here.
 `server.py` has the server which serves the web page, and connects to the
 printer when the command buttons are clicked.
 
-Screenshot:
-###########
+## Screenshot:
 
-To Do:
-######
+to do.
+
+## To Do:
+
 * Format printer output more nicely?
 * Functionality to monitor every 5s or something?
 * Improve website look
