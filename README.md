@@ -4,19 +4,19 @@
 
 * Run `python server.py`
 
-* Connect to the server address (default `localhost:8080`) from a browser.
+* Connect to the server address (default `localhost:8080`) from any browser. This even works if you enter this address where you would usually enter the camera feed in orca slicer (screenshot below).
 
 Note that you need to click the 'resume' button on the printer if you press 'pause'.
 ## Organization:
 
 `schema.html` and `index.css` describe the web page.
 
-Run `python make_index.py` to create the `index.html` page from the schema.
+`make_index.py` creates `index.html` from the schema.
 (In practice, this just adds the video and buttons programatically).
 
 `commands.json` lists gcode M-commands that will be turned into buttons to
 send the corresponding command to the printer. You can add or remove buttons
-here.
+by editing this, re-running `make_index.py`, and restarting the server.
 
 `tcp_interface.py` has the code to connect to the printer.
 
