@@ -8,6 +8,7 @@
 
 * Connect to the server address (default `localhost:8080`) from a browser.
 
+Note that you need to click the 'resume' button on the printer if you press 'pause'.
 ## Organization:
 
 `schema.html` and `index.css` describe the web page.
