@@ -11,7 +11,7 @@ Note that you need to click the 'resume' button on the printer if you press 'pau
 
 `schema.html` and `index.css` describe the web page.
 
-Run `python make_index.py` to create the `index.html` page from the schema.
+`make_index.py` creates `index.html` page from the schema.
 (In practice, this just adds the video and buttons programatically).
 
 `commands.json` lists gcode M-commands that will be turned into buttons to
