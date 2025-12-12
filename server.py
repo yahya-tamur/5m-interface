@@ -7,7 +7,8 @@ from env import printer_ip, server_address, server_port
 file_paths = {'': 'index.html', \
         'schema': 'schema.html', \
         'index': 'index.html', \
-        'index.css': 'index.css' \
+        'index.css': 'index.css', \
+        'jquery.js': 'jquery-3.7.1.min.js' \
         }
 
 class Serv(BaseHTTPRequestHandler):
