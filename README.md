@@ -25,7 +25,7 @@ printer when the command buttons are clicked.
 
 ## Screenshot:
 
-![screenshot](./screenshot.png)
+![screenshot](./screenshot2.png)
 
 ## To Do:
 
