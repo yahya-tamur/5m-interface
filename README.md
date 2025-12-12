@@ -11,12 +11,12 @@ Note that you need to click the 'resume' button on the printer if you press 'pau
 
 `schema.html` and `index.css` describe the web page.
 
-`make_index.py` creates `index.html` page from the schema.
+`make_index.py` creates `index.html` from the schema.
 (In practice, this just adds the video and buttons programatically).
 
 `commands.json` lists gcode M-commands that will be turned into buttons to
 send the corresponding command to the printer. You can add or remove buttons
-here.
+by editing this, re-running `make_index.py`, and restarting the server.
 
 `tcp_interface.py` has the code to connect to the printer.
 
