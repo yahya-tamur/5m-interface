@@ -2,9 +2,7 @@
 
 * Set your printer's ip address in env.py
 
-* Run
-
-```python server.py```
+* Run `python server.py`
 
 * Connect to the server address (default `localhost:8080`) from a browser.
 
@@ -27,7 +25,7 @@ printer when the command buttons are clicked.
 
 ## Screenshot:
 
-to do.
+![screenshot](./screenshot.png)
 
 ## To Do:
 
