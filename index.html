@@ -1,0 +1,33 @@
+<!doctype html>
+ <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href='index.css' rel='stylesheet' type='text/css' /> 
+  </head>
+  <body>
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <div id='pre'>
+        <p> Flashforge 5M Monitoring Tool </p>
+        <p> Code: <a href="todo" > todo </a>
+
+    </div>
+
+      <button onclick="printer_initialize()"> initialize</button>       <button onclick="printer_temp()"> temp</button>       <button onclick="printer_status()"> status</button>       <button onclick="printer_progress()"> progress</button>       <button onclick="printer_light_on()"> light_on</button>       <button onclick="printer_light_off()"> light_off</button>       <button onclick="printer_pause()"> pause</button> 
+      <script>printer_initialize = () => $.ajax("initialize").then(content => document.getElementById('resp').innerText = content)</script>
+      <script>printer_temp = () => $.ajax("temp").then(content => document.getElementById('resp').innerText = content)</script>
+      <script>printer_status = () => $.ajax("status").then(content => document.getElementById('resp').innerText = content)</script>
+      <script>printer_progress = () => $.ajax("progress").then(content => document.getElementById('resp').innerText = content)</script>
+      <script>printer_light_on = () => $.ajax("light_on").then(content => document.getElementById('resp').innerText = content)</script>
+      <script>printer_light_off = () => $.ajax("light_off").then(content => document.getElementById('resp').innerText = content)</script>
+      <script>printer_pause = () => $.ajax("pause").then(content => document.getElementById('resp').innerText = content)</script>
+
+
+    <div id="resp"> response written here </div>
+
+<img id="stream" alt="Camera feed didn't load. You can make sure it's not open elsewhere and refresh this page." src=http://192.168.8.209:8080/?action=stream />
+
+  </body>
+</html>
+

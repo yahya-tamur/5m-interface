@@ -1,0 +1,15 @@
+ body {
+  width: 70%;
+  text-align: center;
+  margin: auto auto;
+  padding-bottom: 30pt;
+}
+
+.text {
+    color: red;
+    padding-top: 20pt;
+}
+
+#resp {
+    padding: 20pt;
+}

@@ -1,0 +1,9 @@
+{
+  "initialize": "~M601 S1\r\n",
+  "temp": "~M105\r\n",
+  "status": "~M119\r\n",
+  "progress": "~M27\r\n",
+  "light_on": "~M146 r255 g255 b255 f0\r\n",
+  "light_off": "~M146 r255 g255 b255 f0\r\n",
+  "pause": "~M25\r\n"
+}
