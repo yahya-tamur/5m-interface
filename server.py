@@ -35,23 +35,24 @@ class Serv(BaseHTTPRequestHandler):
             if (w := lr.find('=')) != -1:
                 param_dict[lr[:w]] = lr[w+1:]
 
-        print(path, param_dict, self.path)
-
         if (file := file_paths.get(path)) is not None:
             self.send_response(200)
             self.end_headers()
             self.wfile.write(Path(f"{server_path}{file}").read_bytes())
 
         elif path in commands:
-            _code, resp = send_to_printer(path, param_dict['printer-ip'])
-            resp = resp.decode('ascii')
-            print(resp)
-            # do nicer printing later?
-            resp = resp[resp.find('\r\n')+2:]
-            print(resp)
-            self.send_response(200)
-            self.end_headers()
-            self.wfile.write(resp.encode('ascii'))
+            code, resp = send_to_printer(path, param_dict['printer-ip'])
+            if code == 200:
+
+                resp = resp.decode('ascii')
+                print(resp)
+                self.send_response(200)
+                self.end_headers()
+                self.wfile.write(resp.encode('ascii'))
+            else:
+                self.send_response(code)
+                self.end_headers()
+
 
         else:
             self.send_response(404)

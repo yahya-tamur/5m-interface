@@ -1,99 +1,188 @@
 <!doctype html>
- <html lang="en">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
 
-<link href="./roboto.css" rel="stylesheet">
-<script src="./bundle.js"></script>
-<body>
-<style>
-  :root {
-    --md-list-container-color: #f4fbfa;
-    --md-list-item-label-text-color: #161d1d;
-    --md-list-item-trailing-supporting-text-color: #3f4948;
-    --md-list-item-trailing-supporting-text-size:24px;
-    --md-list-item-label-text-font: system-ui;
-    --md-list-item-trailing-supporting-text-font: system-ui;
-  }
-  [slot="trailing-supporting-text"] {
-    width: 500px;
-    text-align: end;
-  }
-</style>
-<md-list>
+  <link href="./roboto.css" rel="stylesheet" />
+  <script src="./bundle.js"></script>
+  <body>
+    <style>
+      :root {
+        --md-list-container-color: #f4fbfa;
+        --md-list-item-label-text-color: #161d1d;
+        --md-list-item-trailing-supporting-text-color: #3f4948;
+        --md-list-item-trailing-supporting-text-size: 24px;
+        --md-list-item-label-text-font: system-ui;
+        --md-list-item-trailing-supporting-text-font: system-ui;
+      }
+      [slot="trailing-supporting-text"] {
+        width: 400px;
+        text-align: end;
+      }
 
-  <md-list-item>
-    <div slot="headline">Update Interval</div>
-    <div slot="trailing-supporting-text" style="display: inline-flex; flex-direction: row-reverse;">
-        <md-slider id="slider" step="1000" min="0" max="30000" value='2000'></md-slider>
-        <div id='sliderLabel' style='margin: 7px'> 2 seconds </div> 
-        <md-outlined-button style='display: none; margin-right: 20px;' id='updateButton' onclick='fill_data()'>Update</md-outlined-button>
-    </div>
-
-  </md-list-item>
-  <md-list-item>
-    <div slot="headline">Nozzle Temperature</div>
-    <div slot="trailing-supporting-text" id='temp0' > 0 </div>
-  </md-list-item>
-  <md-list-item>
-      <div slot="headline">Bed Temperature</div>
-    <div slot="trailing-supporting-text" id='temp1'> 1 </div>
-  </md-list-item>
-  <md-list-item>
-      <div slot="headline">Machine Status</div>
-    <div slot="trailing-supporting-text" id='status'> 1 </div>
-  </md-list-item>
-  <md-list-item>
-      <div slot="headline">Move Mode</div>
-    <div slot="trailing-supporting-text" id='move_mode'> 1 </div>
-  </md-list-item>
-  <md-list-item>
-      <div slot="headline">Current File</div>
-    <div slot="trailing-supporting-text" id='file'> 1 </div>
-  </md-list-item>
-  <md-list-item>
-      <div slot="headline">Progress (bytes)</div>
-    <div slot="trailing-supporting-text">
-        <div style="display: inline-flex;">
-            <div id='byte-progress-text'>
-                3/3
-            </div>
-            <md-linear-progress id='byte-progress' value="0.5" style="margin:7px 30px;"></md-linear-progress>
+      #sublist1 [slot="trailing-supporting-text"] {
+        width: 150px;
+        text-align: end;
+      }
+      #sublist2 [slot="trailing-supporting-text"] {
+        width: 150px;
+        text-align: end;
+      }
+      #sublist3 [slot="trailing-supporting-text"] {
+        width: 200px;
+        text-align: end;
+      }
+    </style>
+    <md-list>
+      <md-list-item id="disconnected-message" style="display: none">
+        <div slot="headline">
+          Disconnected. Double check the printer is on and this ip address is
+          correct.
         </div>
-    </div>
-  </md-list-item>
-  <md-list-item>
-      <div slot="headline">Progress (layers)</div>
-    <div slot="trailing-supporting-text">
-        <div style="display: inline-flex;">
-            <div id='layer-progress-text'>
-                3/3
-            </div>
-            <md-linear-progress id='layer-progress' value="0" style="margin:7px 30px;"></md-linear-progress>
+        <div slot="trailing-supporting-text">
+          <div>
+            <md-outlined-text-field
+              placeholder="Printer IP"
+              id="ip-input"
+            ></md-outlined-text-field>
+            <md-outlined-button style="margin: 8px" onclick="refreshbutton()"
+              >Refresh</md-outlined-button
+            >
+          </div>
         </div>
+      </md-list-item>
+
+      <md-list-item>
+        <div slot="headline">Update Interval</div>
+        <div
+          slot="trailing-supporting-text"
+          style="display: inline-flex; flex-direction: row-reverse"
+        >
+          <md-slider
+            id="slider"
+            step="1000"
+            min="0"
+            max="30000"
+            value="2000"
+          ></md-slider>
+          <div id="sliderLabel" style="margin: 7px">2 seconds</div>
+          <md-outlined-button
+            style="display: none; margin-right: 20px"
+            id="updateButton"
+            onclick="fill_data()"
+            >Update</md-outlined-button
+          >
+        </div>
+      </md-list-item>
+      <md-list-item>
+        <div style="display: inline-flex">
+          <md-list id="sublist1" style="{width:" 300;}>
+            <md-list-item>
+              <div slot="headline">Nozzle Temperature</div>
+              <div slot="trailing-supporting-text" id="temp0">222/222</div>
+            </md-list-item>
+            <md-list-item>
+              <div slot="headline">Bed Temperature</div>
+              <div slot="trailing-supporting-text" id="temp1">1</div>
+            </md-list-item>
+          </md-list>
+          <md-list id="sublist2">
+            <md-list-item>
+              <div slot="headline">Machine Status</div>
+              <div slot="trailing-supporting-text" id="status">MOVING</div>
+            </md-list-item>
+            <md-list-item>
+              <div slot="headline">Move Mode</div>
+              <div slot="trailing-supporting-text" id="move_mode">1</div>
+            </md-list-item>
+          </md-list>
+          <md-list id="sublist3">
+            <md-list-item>
+              <div slot="headline">Progress (bytes)</div>
+              <div slot="trailing-supporting-text">
+                <div style="display: inline-flex">
+                  <div id="byte-progress-text">3/3</div>
+                  <md-linear-progress
+                    id="byte-progress"
+                    value="0.5"
+                    style="margin: 7px 30px; width: 30px"
+                  ></md-linear-progress>
+                </div>
+              </div>
+            </md-list-item>
+            <md-list-item>
+              <div slot="headline">Progress (layers)</div>
+              <div slot="trailing-supporting-text">
+                <div style="display: inline-flex">
+                  <div id="layer-progress-text">3/3</div>
+                  <md-linear-progress
+                    id="layer-progress"
+                    value="0"
+                    style="margin: 7px 30px"
+                  ></md-linear-progress>
+                </div>
+              </div>
+            </md-list-item>
+          </md-list>
+        </div>
+      </md-list-item>
+      <md-list-item>
+        <div slot="headline">Current File</div>
+        <div slot="trailing-supporting-text" id="file">1</div>
+      </md-list-item>
+      <md-list-item>
+        <div style="display: flex; justify-content: center">
+          <md-outlined-button
+            id="light"
+            style="margin-right: 20px"
+            onclick="toggle_light()"
+            >Toggle Light</md-outlined-button
+          >
+          <md-outlined-button id="pause" onclick="pause()"
+            >Pause</md-outlined-button
+          >
+        </div>
+      </md-list-item>
+      <md-list-item id="image-error-message" style="display: none">
+        <div slot="headline">
+          Camera feed didn't load. Make sure it's not open elsewhere.
+        </div>
+
+        <div slot="trailing-supporting-text" id="temp0">
+          <md-outlined-button
+            onclick="retry_camera()"
+            style="margin-right: 20px"
+            onclick="retry_camera()"
+            >Retry</md-outlined-button
+          >
+          <md-outlined-button onclick="hide_camera()"
+            >Hide This Message</md-outlined-button
+          >
+        </div>
+      </md-list-item>
+    </md-list>
+
+    <div style="display: flex; justify-content: center">
+      <img id="stream" onerror="image_error()" src="" />
     </div>
-  </md-list-item>
-  <md-list-item>
-    <md-outlined-button id='light' onclick='toggle_light()'>Toggle Light</md-outlined-button>
-    <md-outlined-button id='pause' onclick='pause()'>Pause</md-outlined-button>
-  </md-list-item>  
-</md-list>
 
-<md-dialog id='pause-alert'>
-  <form slot="content" id="form-id" method="dialog">Are you sure? You will need to click resume at the printer.</form>
-  <div slot="actions">
-    <md-text-button form="form-id" value="cancel">Cancel</md-text-button>
-    <md-text-button form="form-id" value="ok">Ok</md-text-button>
-  </div>
-</md-dialog>
-<md-dialog id='pause-confirm'>
-  <form slot="content" id="pause-confirm-form" method="dialog">Pause signal sent.</form>
-</md-dialog>
-<img id="stream" alt="Camera feed didn't load. You can make sure it's not open elsewhere and refresh this page." src='' />
-
-</body>
-<script src="./update.js"></script>
- </html>
+    <md-dialog id="pause-alert">
+      <form slot="content" id="form-id" method="dialog">
+        Are you sure? You will need to click resume at the printer.
+      </form>
+      <div slot="actions">
+        <md-text-button form="form-id" value="cancel">Cancel</md-text-button>
+        <md-text-button form="form-id" value="ok">Ok</md-text-button>
+      </div>
+    </md-dialog>
+    <md-dialog id="pause-confirm">
+      <form slot="content" id="pause-confirm-form" method="dialog">
+        Pause signal sent.
+      </form>
+    </md-dialog>
+  </body>
+  <script src="./update.js"></script>
+</html>
