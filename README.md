@@ -4,7 +4,7 @@
 
 * Run `python server.py`
 
-* Connect to the server address (default `localhost:8080`) from any browser. This even works if you enter this address where you would usually enter the camera feed in orca slicer (screenshot below).
+* Connect to the server address (default `localhost:8080/?printer-ip=<your printer's ip address>`) from any browser. This even works if you enter this address where you would usually enter the camera feed in orca slicer (screenshot below).
 
 Note that you need to click the 'resume' button on the printer if you press 'pause'.
 ## Organization:
