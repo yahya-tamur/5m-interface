@@ -65,7 +65,7 @@ const fill_data = () => {
         }
         interval = 0;
       }
-      resp.text();
+      return resp.text();
     })
     .then((text) => {
       const temp_match = text.match(temp_re);
@@ -91,7 +91,6 @@ const fill_data = () => {
       const progress_match = text.match(progress_re);
 
       let [_, a, b, c, d] = progress_match;
-      console.log(a, b, c, d);
       document.getElementById("byte-progress").value = a;
       document.getElementById("byte-progress").max = b;
       document.getElementById("byte-progress-text").textContent = `${a}/${b}`;
@@ -139,8 +138,6 @@ document.getElementById("ip-input").value = printer_ip;
 
 refreshbutton = () => {
   let link = window.location.href;
-  console.log("aaa");
-  console.log(link, typeof link);
 
   if ((w = link.indexOf("?")) != -1) {
     link = link.slice(0, w);
@@ -153,10 +150,9 @@ const image_error = () => {
 };
 
 const retry_camera = async () => {
-  const stream = document.getElementById("stream");
-  const img_src = stream.src;
-  await fetch(img_src, { cache: "reload" });
-  stream.src = img_src;
+  document.getElementById("stream").src =
+    `http://${printer_ip}:8080/?action=stream&cachebreaker=${new Date().getTime()}`;
+  document.getElementById("image-error-message").style.display = "none";
 };
 
 const hide_camera = () => {
