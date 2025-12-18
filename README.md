@@ -1,34 +1,41 @@
 ## Usage:
 
-* Set your printer's ip address in env.py
+* Set device UI in orca slicer to `localhost:8080/?printer-ip=<your printer's ip address>`
 
-* Run `python server.py`
+* Click `run.bat`. This doesn't install anything; it needs to be turned on whenever
+    you want to see this ui.
 
-* Connect to the server address (default `localhost:8080/?printer-ip=<your printer's ip address>`) from any browser. This even works if you enter this address where you would usually enter the camera feed in orca slicer (screenshot below).
-
-Note that you need to click the 'resume' button on the printer if you press 'pause'.
 ## Organization:
 
-`schema.html` and `index.css` describe the web page.
+This folder contains the python code that serves the website (using http.server)
+and connects to the printer.
 
-`make_index.py` creates `index.html` from the schema.
-(In practice, this just adds the video and buttons programatically).
+The website is mainly on `website/index.html` and `website/update.js`.
 
-`commands.json` lists gcode M-commands that will be turned into buttons to
-send the corresponding command to the printer. You can add or remove buttons
-by editing this, re-running `make_index.py`, and restarting the server.
+I only use npm to make a bundle to include `material-web` and to format files.
 
-`tcp_interface.py` has the code to connect to the printer.
+To customize theme:
 
-`server.py` has the server which serves the web page, and connects to the
-printer when the command buttons are clicked.
+    - Go to `material-web.dev`
+    - Click the palette icon on the top right
+    - Customize the theme
+    - Click the `copy` icon next to `theme controls`
+    - Paste into `theme.css` under the `website` folder.
+
+A roboto font file and style sheet is also included so that the font works
+offline. It's taken from google fonts.
 
 ## Screenshot:
+
+This is for the old version! todo: update
 
 ![screenshot](./screenshot2.png)
 
 ## To Do:
 
-* Format printer output more nicely?
-* Functionality to monitor every 5s or something?
-* Improve website look
+* use and see if it needs small changes
+
+* time started and time remaining?
+        - I'm not sure where or if the printer returns this information, so
+        this isn't easy top implement.
+

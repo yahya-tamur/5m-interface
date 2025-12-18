@@ -5,5 +5,5 @@
   "progress": "~M27\r\n",
   "light_on": "~M146 r255 g255 b255 f0\r\n",
   "light_off": "~M146 r255 g255 b255 f0\r\n",
-  "pause": "~M25\r\n",
+  "pause": "~M25\r\n"
 }

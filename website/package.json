@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "@material/web": "^2.4.1",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "rollup": "^4.53.4"
+  },
+  "devDependencies": {
+    "prettier": "3.7.4"
+  },
+  "scripts": {
+    "make-bundle": "npx rollup -p @rollup/plugin-node-resolve index.js -o bundle.js",
+    "format": "npx prettier *.js *.html *.json *.css --write",
+    "clean": "rm -rf node-modules"
+  }
+}

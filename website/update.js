@@ -1,7 +1,6 @@
 const temp_re = /T0:(.*) T1:(.*) B:(.*)\r\n/;
 //there is some data here I ignore.
-const status_re =
-  /MachineStatus: (\S\w*)\r\nMoveMode: (\S\w*).*CurrentFile: (|\S\w*)\r\n/s;
+const status_re = /CurrentFile: (.*)\r\n/;
 const progress_re = /byte (\S\w*)\/(\S\w*)\r\nLayer: (\S\w*)\/(\S\w*)/;
 
 let printer_ip = "";
@@ -21,8 +20,9 @@ let interval = setInterval(() => {
 
 console.log(slider);
 slider.addEventListener("change", (e) => {
+  fill_data();
+
   let value = e.target.value;
-  console.log(value);
 
   clearInterval(interval);
 
@@ -44,9 +44,9 @@ slider.addEventListener("input", (e) => {
 
   if (seconds == 0) {
     document.getElementById("sliderLabel").style.display = "none";
-    document.getElementById("updateButton").style.display = "block";
+    document.getElementById("updateButton").style.display = "flex";
   } else {
-    document.getElementById("sliderLabel").style.display = "block";
+    document.getElementById("sliderLabel").style.display = "flex";
     document.getElementById("updateButton").style.display = "none";
   }
 });
@@ -55,11 +55,11 @@ const fill_data = () => {
   fetch(`./temp?printer-ip=${printer_ip}`)
     .then((resp) => {
       if (resp.status === 503) {
-        document.getElementById("disconnected-message").style.display = "block";
+        document.getElementById("disconnected-message").style.display = "flex";
         document.getElementById("slider").value = 0;
         document.getElementById("sliderLabel").innerText = "0 seconds";
         document.getElementById("sliderLabel").style.display = "none";
-        document.getElementById("updateButton").style.display = "block";
+        document.getElementById("updateButton").style.display = "flex";
         if (interval !== 0) {
           clearInterval(interval);
         }
@@ -80,9 +80,7 @@ const fill_data = () => {
     .then((text) => {
       const status_match = text.match(status_re);
 
-      document.getElementById("status").textContent = status_match[1];
-      document.getElementById("move_mode").textContent = status_match[2];
-      document.getElementById("file").textContent = status_match[3];
+      document.getElementById("file").textContent = status_match[1];
     })
     .catch((e) => {});
   fetch(`./progress?printer-ip=${printer_ip}`)
@@ -146,7 +144,7 @@ refreshbutton = () => {
 };
 
 const image_error = () => {
-  document.getElementById("image-error-message").style.display = "block";
+  document.getElementById("image-error-message").style.display = "flex";
 };
 
 const retry_camera = async () => {
