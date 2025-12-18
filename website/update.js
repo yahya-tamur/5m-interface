@@ -9,7 +9,6 @@ if ((printer_ip_match = location.search.match(/[&?]printer-ip=([^&]+)/))) {
   printer_ip = printer_ip_match[1];
   document.getElementById("stream").src =
     `http://${printer_ip}:8080/?action=stream`;
-  console.log(printer_ip);
 }
 
 const slider = document.getElementById("slider");
@@ -18,7 +17,6 @@ let interval = setInterval(() => {
   fill_data();
 }, slider.value);
 
-console.log(slider);
 slider.addEventListener("change", (e) => {
   fill_data();
 
@@ -34,7 +32,6 @@ slider.addEventListener("change", (e) => {
     interval = 0;
     // show button
   }
-  console.log(updateInterval);
 });
 
 slider.addEventListener("input", (e) => {
@@ -89,7 +86,6 @@ const fill_data = () => {
       const progress_match = text.match(progress_re);
 
       let [_, a, b, c, d] = progress_match;
-      console.log(a, b, c, d);
       document.getElementById("byte-progress").value = a;
       document.getElementById("byte-progress").max = b;
       document.getElementById("byte-progress-text").textContent = `${a}/${b}`;
