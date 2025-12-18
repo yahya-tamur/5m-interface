@@ -89,6 +89,7 @@ const fill_data = () => {
       const progress_match = text.match(progress_re);
 
       let [_, a, b, c, d] = progress_match;
+      console.log(a, b, c, d);
       document.getElementById("byte-progress").value = a;
       document.getElementById("byte-progress").max = b;
       document.getElementById("byte-progress-text").textContent = `${a}/${b}`;
@@ -134,6 +135,12 @@ pause_alert.addEventListener("close", () => {
 
 document.getElementById("ip-input").value = printer_ip;
 
+document.getElementById("ip-input").addEventListener("keyup", (e) => {
+  if (e.key === "Enter") {
+    refreshbutton();
+  }
+});
+
 refreshbutton = () => {
   let link = window.location.href;
 
@@ -143,7 +150,7 @@ refreshbutton = () => {
   window.location.href = `${link}?printer-ip=${document.getElementById("ip-input").value}`;
 };
 
-const image_error = () => {
+document.getElementById("stream").onerror = () => {
   document.getElementById("image-error-message").style.display = "flex";
 };
 
@@ -156,4 +163,10 @@ const retry_camera = async () => {
 const hide_camera = () => {
   document.getElementById("image-error-message").style.display = "none";
   document.getElementById("stream").style.display = "none";
+  document.getElementById("show-camera-message").style.display = "flex";
+};
+const show_camera = () => {
+  document.getElementById("show-camera-message").style.display = "none";
+  document.getElementById("stream").style.display = "flex";
+  retry_camera();
 };

@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="./roboto.css" rel="stylesheet" />
+    <link href="./theme.css" rel="stylesheet" />
+    <script src="./bundle.js"></script>
   </head>
 
-  <link href="./roboto.css" rel="stylesheet" />
-  <link href="./theme.css" rel="stylesheet" />
-  <script src="./bundle.js"></script>
   <style>
     :root {
       --md-list-item-label-text-color: var(--md-sys-color-primary);
@@ -25,6 +25,12 @@
     #sublist3 [slot="trailing-supporting-text"] {
       width: 80px;
       text-align: end;
+    }
+
+    @media screen and (max-width: 700px) {
+      #sublist4 {
+        display: none;
+      }
     }
   </style>
   <body
@@ -128,16 +134,11 @@
             </md-list>
             <md-list
               id="sublist4"
-              style="
-                flex: 1 1 auto;
-                max-width: 300px;
-                margin-left: 10px;
-                display: if(media(width < 700px): none; else: flex);
-              "
+              style="flex: 1 1 auto; max-width: 300px; margin-left: 10px"
             >
               <md-list-item>
                 <md-linear-progress
-                  id="byte-progflex-growress"
+                  id="byte-progress"
                   value="0.5"
                   style="margin: 7px 0px; width: 100%"
                 ></md-linear-progress>
@@ -174,11 +175,11 @@
             Camera feed didn't load. Make sure it's not open elsewhere.
           </div>
 
-          <div slot="trailing-supporting-text" id="temp0" style="width: 250px">
+          <div slot="trailing-supporting-text" style="width: 250px">
             <md-outlined-button
               onclick="retry_camera()"
+              id="retry-camera"
               style="margin-right: 20px"
-              onclick="retry_camera()"
               >Retry</md-outlined-button
             >
             <md-outlined-button onclick="hide_camera()"
@@ -186,14 +187,20 @@
             </md-outlined-button>
           </div>
         </md-list-item>
+        <md-list-item id="show-camera-message" style="display: none">
+          <div id="show-camera" style="display: flex; justify-content: center">
+            <md-outlined-button onclick="show_camera()"
+              >Show Camera
+            </md-outlined-button>
+          </div>
+        </md-list-item>
       </md-list>
 
-      <div style="display: flex; justify-content: center; flex-grow: 1">
+      <div style="display: flex; overflow: hidden; margin: 0px 20px 20px 20px">
         <img
           id="stream"
-          onerror="image_error()"
           src=""
-          style="height: calc(100% - 28px)"
+          style="height: 100%; object-fit: contain; flex: 1 1 auto"
         />
       </div>
     </div>

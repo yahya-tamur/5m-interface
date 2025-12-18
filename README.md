@@ -12,15 +12,15 @@ and connects to the printer.
 
 The website is mainly on `website/index.html` and `website/update.js`.
 
-I only use npm to make a bundle to include `material-web` and to format files.
+I only use npm to make a bundle to include `material-web` from and to format files.
 
 To customize theme:
 
-    - Go to `material-web.dev`
-    - Click the palette icon on the top right
-    - Customize the theme
-    - Click the `copy` icon next to `theme controls`
-    - Paste into `theme.css` under the `website` folder.
+  - Go to `material-web.dev`
+  - Click the palette icon on the top right
+  - Customize the theme
+  - Click the `copy` icon next to `theme controls`
+  - Paste into `theme.css` under the `website` folder.
 
 A roboto font file and style sheet is also included so that the font works
 offline. It's taken from google fonts.
