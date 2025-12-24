@@ -19,12 +19,12 @@ files = [
 
 file_paths = {file: f"{server_path}/{file}" for file in files}
 file_paths[""] = f"{server_path}/index.html"
+file_paths["screenshot3.png"] = "./screenshot3.png"
 
 
 class Serv(BaseHTTPRequestHandler):
 
     def do_GET(self):
-
         if (w := self.path.find("?")) != -1:
             path = self.path[1:w]
             params = self.path[w + 1 :]

@@ -86,9 +86,14 @@ const fill_data = () => {
       const progress_match = text.match(progress_re);
 
       let [_, a, b, c, d] = progress_match;
+
       document.getElementById("byte-progress").value = a;
       document.getElementById("byte-progress").max = b;
-      document.getElementById("byte-progress-text").textContent = `${a}/${b}`;
+      if (b === "100") {
+        document.getElementById("byte-progress-text").textContent = `${a}%`;
+      } else {
+        document.getElementById("byte-progress-text").textContent = `${a}/${b}`;
+      }
 
       document.getElementById("layer-progress").value = c;
       document.getElementById("layer-progress").max = d;
